@@ -1,0 +1,24 @@
+@charset "UTF-8";
+.checked {
+    color: orange;
+}
+
+.progress {
+    height: 9px;
+    margin-bottom: 12px;
+}
+
+.profilePic{
+	width: 70%;
+    type:thumbnail;
+    height:30%;
+}
+
+.clearDetails{
+	clear:both;
+}
+
+
+.bold{
+	font-content:bold;
+}

@@ -1,0 +1,12 @@
+.advisorProfile{
+	width: 90%;
+    type:thumbnail;
+    height:80%;
+}
+
+.clearDetails{
+	clear:both;
+}
+.checked {
+    color: orange;
+}
