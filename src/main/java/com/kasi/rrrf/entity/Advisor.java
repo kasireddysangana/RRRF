@@ -1,40 +1,32 @@
 package com.kasi.rrrf.entity;
 
-import java.io.InputStream;
-
 public class Advisor {
 
-	private String advisorId;
+	private String advisorUserId;
 	private String firstName;
 	private String lastName;
 	private String displayName;
-	private String password;
 	private String mobile;
 	private float yearsOfExp;
 	private double hourlyRate;
 	private String qualificaiton;
 	private String location;
 	private String description;
-	private InputStream image;
-	private String userId;
+	
 	
 	public Advisor() {}
 
-	public Advisor(String advisorId, String firstName, String lastName, String displayName, String password,
-			String mobile, float yearsOfExp, double hourlyRate, String qualificaiton, String description,
-			InputStream image, String userId, String location) {
-		this.advisorId = advisorId;
+	public Advisor(String advisorUserId, String firstName, String lastName, String displayName,
+			String mobile, float yearsOfExp, double hourlyRate, String qualificaiton, String description, String location) {
+		this.advisorUserId = advisorUserId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.displayName = displayName;
-		this.password = password;
 		this.mobile = mobile;
 		this.yearsOfExp = yearsOfExp;
 		this.hourlyRate = hourlyRate;
 		this.qualificaiton = qualificaiton;
 		this.description = description;
-		this.image = image;
-		this.userId = userId;
 		this.location = location;
 	}
 
@@ -44,14 +36,6 @@ public class Advisor {
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
-
-	public String getAdvisorId() {
-		return advisorId;
-	}
-
-	public void setAdvisorId(String advisorId) {
-		this.advisorId = advisorId;
 	}
 
 	public String getFirstName() {
@@ -76,14 +60,6 @@ public class Advisor {
 
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getMobile() {
@@ -126,20 +102,12 @@ public class Advisor {
 		this.description = description;
 	}
 
-	public InputStream getImage() {
-		return image;
+	public String getAdvisorUserId() {
+		return advisorUserId;
 	}
 
-	public void setImage(InputStream image) {
-		this.image = image;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setAdvisorUserId(String advisorUserId) {
+		this.advisorUserId = advisorUserId;
 	}
 	
 	

@@ -1,6 +1,5 @@
 package com.kasi.rrrf.dao;
 
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -15,13 +14,13 @@ public class ClientDAO {
 		int count = 0;
 		try {
 			con = DBConnect.getConnection();
-			pst = con.prepareStatement("INSERT INTO CLIENT (CLIENT_ID,CLIENT_NAME,"
-					+ "CLIENT_MOBILE,CLIENT_LOCATION, USER_ID) VALUES (?,?,?,?,?)");
-			pst.setString(1, client.getClientId());
+			pst = con.prepareStatement("INSERT INTO CLIENT (CLIENT_USER_ID,CLIENT_NAME,CLIENT_MOBILE,CLIENT_LOCATION) "
+					+ "VALUES (?,?,?,?)");
+			pst.setString(1, client.getClientUserId());
 			pst.setString(2, client.getClientName());
 			pst.setString(3, client.getClientMobile());
 			pst.setString(4, client.getClientLocation());
-			pst.setString(5, client.getUserId());
+			
 			count = pst.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

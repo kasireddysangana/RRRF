@@ -3,36 +3,33 @@
 
 <%
 			AdvisorBasicDetails advisor = (AdvisorBasicDetails)request.getAttribute("advisor");
-			//List<ReviewsAndRating> reviewList = new ReviewsAndRatingDAO().fetchReviews(advisor.getAdvisorUserId());
 			Integer finalRating = (Integer)request.getAttribute("finalRating");
 			Integer counter = (Integer)request.getAttribute("counter");
 			Integer totalNoOfReviews = (Integer)request.getAttribute("totalNoOfReviews");
 			String advisorId = advisor.getAdvisorUserId();
-			System.out.println("In advisorshortinfo advisorId : " + advisorId);
 			int hourlyRate = (int) (advisor.getHourlyRate());
 			if(counter%2==1)
-			{
+					{
 					
 						
 		%>
+		
+		<!-- <script language="JavaScript" type="text/javascript">
+		$(document).ready(function(){
+			$('#rating').mouseover(function(){
+				alert("hello kasi");
+		</script> -->
+		
 			<div id="advisorDetails" class="col-md-12" style="flex-direction:row">
 			
 				<div class="col-md-6">	
 					<div >
 						<div class="col-md-6 col-sm-6" style="margin-bottom:10px">
-							<%if(finalRating!=0){ %>
-							<a href="advisorProfile1.jsp?advisorId=<%=advisorId%>&rating=<%=finalRating%>"><img src="./appimages/<%=advisorId%>.jpg" class="profile"></a>
-							<%}else{ %>
-							<a href="advisorProfile1.jsp?advisorId=<%=advisorId%>"><img src="./appimages/<%=advisorId%>.jpg" class="profile"></a>
-							<%} %>
+							<a href="advisorProfile1.jsp?advisorId=<%=advisorId%>&rating=<%=finalRating%>"><img src="./images/kasi.jpg" class="profile"></a>
 						</div>
 						<div class="col-md-6">
 							<div>
-								<%if(finalRating!=0){ %>
 								<h3><a href="advisorProfile1.jsp?advisorId=<%=advisorId%>&rating=<%=finalRating%>" style="text-decoration:none"><%=advisor.getDisplayName() %></a></h3>
-								<%}else{ %>
-								<h3><a href="advisorProfile1.jsp?advisorId=<%=advisorId%>" style="text-decoration:none"><%=advisor.getDisplayName() %></a></h3>
-								<%} %>
 							</div>
 							
 								<div>
@@ -80,28 +77,15 @@
 			} else{%>
 			
 				<div class="col-md-6">	
-					<div>
+					<div >
 						<div class="col-md-6 col-sm-6 " style="margin-bottom:10px">
-						<%if(finalRating!=0){ %>
-						
-							<a href="advisorProfile1.jsp?advisorId=<%=advisorId%>&rating=<%=finalRating%>"><img src="./appimages/<%=advisorId%>.jpg" class="profile"></a>
-						
-							<%}else{ %>
-						
-							<a href="advisorProfile1.jsp?advisorId=<%=advisorId%>"><img src="./appimages/<%=advisorId%>.jpg" class="profile"></a>
-						
-							<%} %>
-						
+							<a href="advisorProfile1.jsp?advisorId=<%=advisorId%>&rating=<%=finalRating%>"><img src="./images/anuradha.jpg" class="profile"></a>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6 ">
 							<div>
-								<%if(finalRating!=0){ %>
 								<h3><a href="advisorProfile1.jsp?advisorId=<%=advisorId%>&rating=<%=finalRating%>" style="text-decoration:none"><%=advisor.getDisplayName() %></a></h3>
-								<%}else{ %>
-								<h3><a href="advisorProfile1.jsp?advisorId=<%=advisorId%>" style="text-decoration:none"><%=advisor.getDisplayName() %></a></h3>
-								<%} %>
 							</div>
-						
+							<div>
 								<a href="" 
 								id="rating" style="text-decoration:none;font-size:30px">
 									<%	
@@ -136,11 +120,11 @@
 							</div>
 						</div>
 					
-					
+					</div>
 					<div class="profileDetails col-md-12">
 						<p><%=advisor.getDescription() %> <a href="#" style="text-decoration:none">More>></a></p>
 					</div>
-					</div>
+					
 				</div>
 				<div class="profileDetails row">
 					<hr>

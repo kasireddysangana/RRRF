@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kasi.rrrf.dao.ReviewsAndRatingDAO;
-import com.kasi.rrrf.entity.ReviewsAndRating;
+import com.kasi.rrrf.dao.RateAndReviewDAO;
+import com.kasi.rrrf.entity.RateAndReview;
 
 /**
  * Servlet implementation class GetReviewsAndRatingServlet
@@ -24,13 +24,14 @@ public class GetReviewsAndRatingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String advisorId = (String) request.getParameter("advisorId");
+		String advisorUserId = (String) request.getParameter("advisorId");
 		Integer finalRating = (Integer.parseInt(request.getParameter("rating")));
 		String displayName = request.getParameter("displayName");
-		List<ReviewsAndRating> reviewsAndRatingList = new ReviewsAndRatingDAO().fetchReviews(advisorId);
+		List<RateAndReview> reviewsAndRatingList = new RateAndReviewDAO().fetchReviews(advisorUserId);
 		request.setAttribute("reviewsAndRatingList", reviewsAndRatingList);
 		request.setAttribute("finalRating", finalRating);
 		request.setAttribute("displayName", displayName);
+		request.setAttribute("advisorUserId", advisorUserId);
 		request.getRequestDispatcher("review.jsp").forward(request, response);
 	}
 

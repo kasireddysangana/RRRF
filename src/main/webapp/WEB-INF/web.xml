@@ -3,13 +3,15 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+
+	<display-name>Archetype Created Web Application</display-name>
   
   <servlet>
   	<servlet-name>GetRegisteredAdvisorsServlet</servlet-name>
   	<display-name>GetRegisteredAdvisorsServlet</display-name>
   	<description></description>
   	<servlet-class>com.kasi.rrrf.servlet.GetRegisteredAdvisorsServlet</servlet-class>
+  	<!-- <load-on-startup>0</load-on-startup> -->
   </servlet>
   
   
@@ -37,6 +39,42 @@
   	<description></description>
   	<servlet-class>com.kasi.rrrf.servlet.GetRegisteredAdvisorsByLocationServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AuthenticateUserServlet</servlet-name>
+  	<display-name>AuthenticateUserServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.kasi.rrrf.servlet.AuthenticateUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>RateAndReviewServlet</servlet-name>
+  	<display-name>RateAndReviewServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.kasi.rrrf.servlet.RateAndReviewServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>UserLogoutServlet</servlet-name>
+  	<display-name>UserLogoutServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.kasi.rrrf.servlet.UserLogoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>SignOutServlet</servlet-name>
+  	<display-name>SignOutServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.kasi.rrrf.servlet.SignOutServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>UserSignOutServlet</servlet-name>
+  	<display-name>UserSignOutServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.kasi.rrrf.servlet.UserSignOutServlet</servlet-class>
+  </servlet>
+  <!-- <servlet>
+  	<servlet-name>ValidateUserLoginServlet</servlet-name>
+  	<display-name>ValidateUserLoginServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.kasi.rrrf.servlet.ValidateUserLoginServlet</servlet-class>
+  </servlet> -->
   
   <servlet-mapping>
   	<servlet-name>AdvisorRegistrationServlet</servlet-name>
@@ -44,13 +82,13 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ClientRegistrationServlet</servlet-name>
-  	<url-pattern>/ClientRegistrationServlet/*</url-pattern>
+  	<url-pattern>/ClientRegiionServlet/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>GetRegisteredAdvisorsServlet</servlet-name>
   	<url-pattern>/index</url-pattern>
-  	
   </servlet-mapping>
+ 
   <servlet-mapping>
   	<servlet-name>GetReviewsAndRatingServlet</servlet-name>
   	<url-pattern>/GetReviewsAndRatingServlet</url-pattern>
@@ -59,8 +97,25 @@
   	<servlet-name>GetRegisteredAdvisorsByLocationServlet</servlet-name>
   	<url-pattern>/GetRegisteredAdvisorsByLocationServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AuthenticateUserServlet</servlet-name>
+  	<url-pattern>/AuthenticateUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RateAndReviewServlet</servlet-name>
+  	<url-pattern>/RateAndReviewServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UserSignOutServlet</servlet-name>
+  	<url-pattern>/UserSignOutServlet</url-pattern>
+  </servlet-mapping>
   
-  <welcome-file-list>
-	<welcome-file>GetRegisteredAdvisorsServlet</welcome-file> 
-</welcome-file-list>
+  <!-- <servlet-mapping>
+  	<servlet-name>ValidateUserLoginServlet</servlet-name>
+  	<url-pattern>/ValidateUserLoginServlet</url-pattern>
+  </servlet-mapping> -->
+  
+  <!-- <welcome-file-list>
+	<welcome-file>index2.jsp</welcome-file> 
+</welcome-file-list> -->
 </web-app>

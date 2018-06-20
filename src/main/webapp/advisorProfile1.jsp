@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.kasi.rrrf.entity.Advisor,com.kasi.rrrf.dao.AdvisorDAO,java.util.List,com.kasi.rrrf.entity.ReviewsAndRating,com.kasi.rrrf.dao.ReviewsAndRatingDAO" %>
+<%@page import="com.kasi.rrrf.entity.Advisor,com.kasi.rrrf.dao.AdvisorDAO,java.util.List,com.kasi.rrrf.entity.RateAndReview,com.kasi.rrrf.dao.RateAndReviewDAO" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Advisor Profile</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./css/advisorProfile.css">
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -19,10 +19,22 @@
 
 	<%
 	String advisorId = (String) request.getParameter("advisorId");
-	int finalRating = Integer.parseInt(request.getParameter("rating"));
+	String strRating = (String) request.getParameter("rating");
+	Integer finalRating = 0;
+	if(strRating!=null)
+	{
+		finalRating  = Integer.parseInt(strRating);
+	}
+	//Integer finalRating = Integer.parseInt(request.getParameter("rating"));
+	
+	System.out.println("finalRating 1 : " + finalRating);
+	System.out.println("advisorId : "  + advisorId);
+	
 	Advisor advisor = new AdvisorDAO().fetchAdvisorDetails(advisorId);
-	Advisor advisor1 = (Advisor) request.getAttribute("advisor");
-	if(advisor.getAdvisorId()!=null)
+	//Advisor advisor = (Advisor) request.getAttribute("advisor");
+	System.out.println("advisorId : "  + advisor.getAdvisorUserId());
+	System.out.println("Display Name : "  + advisor.getDisplayName());
+	if(advisor.getAdvisorUserId()!=null)
 	{
 		int hourlyRate = (int) (advisor.getHourlyRate());
 	%>
@@ -30,7 +42,7 @@
 		<div>	
 				<div class="row">
 					<div class="col-md-4" style="margin-top:15px">
-						<a href="#"><img src="./images/kasi.jpg" class="advisorProfile"></a>
+						<a href="#"><img src="./appimages/<%=advisorId%>.jpg" class="advisorProfile"></a>
 					</div>
 					<div class="col-md-4" style="margin-top:15px">
 						<div>
@@ -67,7 +79,7 @@
 						</div>
 						<br>
 						<div>
-							<h4><a href="#">Contact Me</a></h4>
+							<h4><a href="">Contact Me</a></h4>
 						</div>
 						<br>
 						<div>

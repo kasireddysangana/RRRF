@@ -4,31 +4,28 @@ import java.io.InputStream;
 
 public class AdvisorBasicDetails {
 
-	private String advisorId;
+	private String advisorUserId;
 	private String displayName;
 	private float yearsOfExp;
 	private double hourlyRate;
 	private String description;
-	private InputStream image;
 	
 	public AdvisorBasicDetails() {}
 	
-	public AdvisorBasicDetails(String advisorId, String displayName, float yearsOfExp, double hourlyRate,
-			String description, InputStream image) {
-		this.advisorId = advisorId;
+	public AdvisorBasicDetails(String advisorUserId, String displayName, float yearsOfExp, double hourlyRate, String description) {
+		this.advisorUserId = advisorUserId;
 		this.displayName = displayName;
 		this.yearsOfExp = yearsOfExp;
 		this.hourlyRate = hourlyRate;
 		this.description = description;
-		this.image = image;
 	}
 
-	public String getAdvisorId() {
-		return advisorId;
+	public String getAdvisorUserId() {
+		return advisorUserId;
 	}
 
-	public void setAdvisorId(String advisorId) {
-		this.advisorId = advisorId;
+	public void setAdvisorUserId(String advisorUserId) {
+		this.advisorUserId = advisorUserId;
 	}
 
 	public String getDisplayName() {
@@ -62,13 +59,4 @@ public class AdvisorBasicDetails {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public InputStream getImage() {
-		return image;
-	}
-
-	public void setImage(InputStream image) {
-		this.image = image;
-	}
-	
 }

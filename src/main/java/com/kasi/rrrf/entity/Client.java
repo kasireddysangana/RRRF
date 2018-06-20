@@ -2,29 +2,27 @@ package com.kasi.rrrf.entity;
 
 public class Client {
 	
-	private String clientId;
+	private String clientUserId;
 	private String clientName;
 	private String clientMobile;
 	private String clientLocation;
-	private String userId;
 	
 	public Client() {}
 
-	public Client(String clientId, String clientName, String clientMobile, String clientLocation, 
-			String userId) {
-		this.clientId = clientId;
+	public Client(String clientUserId, String clientName, String clientMobile, String clientLocation) 
+	{
+		this.clientUserId = clientUserId;
 		this.clientName = clientName;
 		this.clientMobile = clientMobile;
 		this.clientLocation = clientLocation;
-		this.userId = userId;
 	}
 
-	public String getClientId() {
-		return clientId;
+	public String getClientUserId() {
+		return clientUserId;
 	}
 
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
+	public void setClientUserId(String clientUserId) {
+		this.clientUserId = clientUserId;
 	}
 
 	public String getClientName() {
@@ -51,12 +49,4 @@ public class Client {
 		this.clientLocation = clientLocation;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	
 }

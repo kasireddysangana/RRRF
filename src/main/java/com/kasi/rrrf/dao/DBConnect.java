@@ -12,9 +12,9 @@ public class DBConnect {
 		Connection con = null;
 //		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 //		Class.forName("oracle.jdbc.driver.OracleDriver");
-		String url = "jdbc:mysql://localhost:3306/rrr";
+		String url = "jdbc:mysql://localhost:3306/rrrf";
 		Class.forName("com.mysql.jdbc.Driver");
-		return DriverManager.getConnection(url, "root", "kasi");
+		return DriverManager.getConnection(url, "root", "kasireddy");
 	}
 	public static void closeConnection(Connection con)
 	{

@@ -1,10 +1,7 @@
 package com.kasi.rrrf.dao;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,32 +14,24 @@ public class AdvisorDAO {
 	{
 		Connection con = null;
 		PreparedStatement pst = null;
-		FileInputStream inputStream = null;
-		boolean result;
-		//String image = null;
 		int count = 0;
 		try {
 			con = DBConnect.getConnection();
-			//inputStream = new FileInputStream(image);
-			pst = con.prepareStatement("INSERT INTO ADVISOR (ADVISOR_ID,ADVISOR_FIRST_NAME,"
-					+ "ADVISOR_LAST_NAME,ADVISOR_DISPLAY_NAME,ADVISOR_PASSWORD,ADVISOR_MOBILE,"
-					+ "ADVISOR_YEARS_OF_EXP,"
-					+ "ADVISOR_HOURLY_RATE,ADVISOR_QUALIFICATION,ADVISOR_LOCATION,"
-					+ "ADVISOR_BRIEF_DESCRIPTION,USER_ID) VALUES (?,?,?,?,?,?,?,?,?,"
-					+ "?,?,?)");
-			pst.setString(1,advisor.getAdvisorId());
+			pst = con.prepareStatement("INSERT INTO ADVISOR (ADVISOR_USER_ID, ADVISOR_FIRST_NAME, ADVISOR_LAST_NAME, ADVISOR_DISPLAY_NAME, "
+					+ "ADVISOR_MOBILE, ADVISOR_YEARS_OF_EXP, ADVISOR_HOURLY_RATE, ADVISOR_QUALIFICATION, ADVISOR_LOCATION, ADVISOR_BRIEF_DESCRIPTION) "
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
+			pst.setString(1, advisor.getAdvisorUserId());
+			//pst.setString(2, advisor.getUserName());
 			pst.setString(2, advisor.getFirstName());
 			pst.setString(3,advisor.getLastName());
 			pst.setString(4, advisor.getDisplayName());
-			pst.setString(5, advisor.getPassword());
-			pst.setString(6,advisor.getMobile());
-			pst.setFloat(7, advisor.getYearsOfExp());
-			pst.setDouble(8,advisor.getHourlyRate());
-			pst.setString(9, advisor.getQualificaiton());
-			pst.setString(10,advisor.getLocation());
-			pst.setString(11, advisor.getDescription());
-			//pst.setString(12, "Hello");
-			pst.setString(12, advisor.getUserId());
+			pst.setString(5,advisor.getMobile());
+			pst.setFloat(6, advisor.getYearsOfExp());
+			pst.setDouble(7,advisor.getHourlyRate());
+			pst.setString(8, advisor.getQualificaiton());
+			pst.setString(9,advisor.getLocation());
+			pst.setString(10, advisor.getDescription());
+			
 			count = pst.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -53,7 +42,7 @@ public class AdvisorDAO {
 		return (count==1);
 	}
 	
-	public Advisor fetchAdvisorDetails(String advisorId)
+	public Advisor fetchAdvisorDetails(String advisorUserId)
 	{
 		Advisor advisor = null;
 		Connection con = null;
@@ -62,22 +51,21 @@ public class AdvisorDAO {
 		
 		try{
 			con = DBConnect.getConnection();
-			pst = con.prepareStatement("select ADVISOR_ID,ADVISOR_DISPLAY_NAME,ADVISOR_MOBILE,ADVISOR_YEARS_OF_EXP,"
-					+ "ADVISOR_HOURLY_RATE,ADVISOR_QUALIFICATION,ADVISOR_BRIEF_DESCRIPTION,ADVISOR_IMAGE "
-					+ "from advisor where ADVISOR_ID = ?");
-			pst.setString(1,advisorId);
+			pst = con.prepareStatement("select ADVISOR_USER_ID,ADVISOR_DISPLAY_NAME,ADVISOR_MOBILE,ADVISOR_YEARS_OF_EXP,"
+					+ "ADVISOR_HOURLY_RATE,ADVISOR_QUALIFICATION,ADVISOR_BRIEF_DESCRIPTION "
+					+ "from advisor where ADVISOR_USER_ID = ?");
+			pst.setString(1,advisorUserId);
 			rs = pst.executeQuery();
 			while(rs.next())
 			{
 				advisor = new Advisor();
-				advisor.setAdvisorId(rs.getString(1));
+				advisor.setAdvisorUserId(rs.getString(1));
 				advisor.setDisplayName(rs.getString(2));
 				advisor.setMobile(rs.getString(3));
 				advisor.setYearsOfExp(rs.getFloat(4));
 				advisor.setHourlyRate(rs.getFloat(5));
 				advisor.setQualificaiton(rs.getString(6));
-				advisor.setDescription(rs.getString(7));
-				advisor.setImage(rs.getBinaryStream(8));
+				advisor.setDescription(rs.getString(7));			
 				
 			}
 		}catch(Exception e) {
@@ -90,23 +78,22 @@ public class AdvisorDAO {
 		
 		return advisor;
 	}
-	public List<Advisor> fetchAdvisorsByLocation(String location)
+	public List<AdvisorBasicDetails> fetchAdvisorsByLocation(String location)
 	{
-		ArrayList<Advisor> alist = new ArrayList<Advisor>();
+		ArrayList<AdvisorBasicDetails> alist = new ArrayList<AdvisorBasicDetails>();
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		
 		try{
 			con = DBConnect.getConnection();
-			pst = con.prepareStatement("select * from advisor where location=?");
+			pst = con.prepareStatement("select ADVISOR_USER_ID,ADVISOR_DISPLAY_NAME,ADVISOR_YEARS_OF_EXP,ADVISOR_HOURLY_RATE, ADVISOR_BRIEF_DESCRIPTION "
+					+ "from advisor where ADVISOR_LOCATION=?");
 			pst.setString(1,location);
 			rs = pst.executeQuery();
 			while(rs.next())
 			{
-				alist.add(new Advisor(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
-						rs.getString(5),rs.getString(6),rs.getFloat(7),rs.getDouble(8),rs.getString(9),
-						rs.getString(10),rs.getBinaryStream(11),rs.getString(12),rs.getString(13)));
+				alist.add(new AdvisorBasicDetails(rs.getString(1),rs.getString(2),rs.getFloat(3),rs.getDouble(4),rs.getString(5)));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -127,14 +114,13 @@ public class AdvisorDAO {
 		
 		try{
 			con = DBConnect.getConnection();
-			pst = con.prepareStatement("select ADVISOR_ID,ADVISOR_DISPLAY_NAME,ADVISOR_YEARS_OF_EXP,ADVISOR_HOURLY_RATE,"
-					+ "ADVISOR_BRIEF_DESCRIPTION,ADVISOR_IMAGE from advisor");
+			pst = con.prepareStatement("select ADVISOR_USER_ID,ADVISOR_DISPLAY_NAME,ADVISOR_YEARS_OF_EXP,ADVISOR_HOURLY_RATE,"
+					+ "ADVISOR_BRIEF_DESCRIPTION from advisor");
 			
 			rs = pst.executeQuery();
 			while(rs.next())
 			{
-				alist.add(new AdvisorBasicDetails(rs.getString(1),rs.getString(2),rs.getFloat(3),rs.getDouble(4),rs.getString(5),
-						rs.getBinaryStream(6)));
+				alist.add(new AdvisorBasicDetails(rs.getString(1),rs.getString(2),rs.getFloat(3),rs.getDouble(4),rs.getString(5)));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -145,5 +131,32 @@ public class AdvisorDAO {
 		}
 		
 		return alist;
+	}
+	public String getAdvisorDisplayName(String advisorUserId)
+	{
+		String advisorDisplayName = null;
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		try{
+			con = DBConnect.getConnection();
+			pst = con.prepareStatement("select ADVISOR_DISPLAY_NAME from advisor where ADVISOR_USER_ID = ?");
+			pst.setString(1,advisorUserId);
+			
+			rs = pst.executeQuery();
+			if(rs.next())
+			{
+				advisorDisplayName=rs.getString(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConnect.closeResultSet(rs);
+			DBConnect.closeStatement(pst);
+			DBConnect.closeConnection(con);
+		}
+		
+		return advisorDisplayName;
 	}
 }
